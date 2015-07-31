@@ -1,8 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/gray200</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/gray600</item>
+        <item name="android:textColor">@color/gray800</item>
+        <item name="drawerArrowStyle">@style/CustomDrawerArrowStyle</item>
+        <item name="colorPrimary">@color/theme600</item>
+        <item name="colorPrimaryDark">@color/theme800</item>
+        <item name="colorAccent">@color/accent500</item>
+        <item name="colorControlNormal">@color/gray800</item>
+        <item name="colorControlActivated">@color/accent500</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="CustomDrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/white</item>
+    </style>
+
+
+    <style name="toolbarMenuTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/gray600</item>
     </style>
 
 </resources>

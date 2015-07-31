@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Based on http://www.google.com/design/spec/style/color.html -->
+
+    <!-- Theme & Accent -->
+    <color name="theme200">#79f531</color>
+    <color name="theme400">#57d916</color>
+    <color name="theme600">#40c500</color>
+    <color name="theme800">#38a800</color>
+    <color name="accent500">#0061c2</color>
+
+
+    <!-- Grayscales -->
+    <color name="gray200">#EEEEEE</color>
+    <color name="gray400">#BDBDBD</color>
+    <color name="gray600">#757575</color>
+    <color name="gray800">#424242</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Others -->
+    <color name="green600">#43A047</color>
+
+</resources>

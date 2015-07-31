@@ -6,8 +6,22 @@
 
     <string name="regist">登録</string>
     <string name="send">送信</string>
+    <string name="search">検索</string>
     <string name="notification">通知</string>
+    <string name="reply">返信</string>
+    <string name="transfer">転送</string>
     <string name="voice_reply">音声で返信</string>
+    <string name="input_content">入力内容</string>
+
+    <string name="message_title">新着メッセージ</string>
+
+    <string name="search_title">チャット友達を検索</string>
+    <string name="search_description">下の検索ボタンを押すと、あなたのチャット相手としてランダムにユーザが選択されます。\n
+    この奇跡の出会いを楽しんでください！</string>
+    <string name="register_title">まずは登録</string>
+    <string name="register_description">チャットを始める前に、まずはユーザ登録\n
+        名前を入力するだけなのでとても簡単！</string>
+
 
     <string name="notification_posted">Notification posted</string>
 
@@ -17,5 +31,10 @@
     <string name="token_error_message">An error occurred while either fetching the InstanceID token,
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_connectable_user">現在コネクトできるユーザが存在しません</string>
+    <string name="already_linked">すでにユーザとつながっています</string>
 
 </resources>
