@@ -6,6 +6,7 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 
 /**
@@ -31,5 +32,9 @@ public interface RetrofitUserService {
     @FormUrlEncoded
     @POST(CONNECT_PATH)
     public void linkUser(@Field("id") int id, Callback<User> cb);
+
+    @FormUrlEncoded
+    @PUT(USER_PATH_WITH_ID)
+    public void updateToken(@Field("id") int id, @Field("gcm_id") String token, Callback<User> cb);
 
 }

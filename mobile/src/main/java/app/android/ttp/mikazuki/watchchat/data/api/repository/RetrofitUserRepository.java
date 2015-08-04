@@ -109,4 +109,21 @@ public class RetrofitUserRepository implements UserRepository {
             }
         });
     }
+
+    @Override
+    public void updateToken(int id, String token, final BaseCallback<User> cb) {
+        mAPI.updateToken(id, token, new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                Log.d(TAG, "update!!");
+                cb.onResponse(user);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e(TAG, error.getMessage());
+                cb.onResponse(null);
+            }
+        });
+    }
 }

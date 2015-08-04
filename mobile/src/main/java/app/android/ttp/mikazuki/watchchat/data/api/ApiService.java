@@ -18,7 +18,7 @@ public interface ApiService {
     final String UNLINK_USER = "/";
     final String SEND_MESSAGE = "/";
     final String SEARCH_USER = "/";
-
+    final String UPDATE_TOKEN = "/";
 
     @FormUrlEncoded
     @POST(SAMPLE_PATH)
@@ -38,6 +38,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(UNLINK_USER)
     public void unlinkUser(@Field("name") String name, Callback<String> cb);
+
+    @FormUrlEncoded
+    @POST(UPDATE_TOKEN)
+    public void updateToken(@Field("id") String id, Callback<String> cb);
 
 
 }
