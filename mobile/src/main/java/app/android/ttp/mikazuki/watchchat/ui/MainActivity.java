@@ -171,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
             @Override
             public void onResponse(List<Message> messages) {
                 if (messages != null && messages.size() > 0) {
+                    for (Message message: messages){
+                        System.out.println(message.getCreatedAt());
+                    }
+
                     Message[] messageArr = messages.toArray(new Message[0]);
                     Intent i = new Intent(Constants.FRAGMENT_MESSAGES_FETCHED);
                     i.putExtra(Constants.FETCHED_MESSAGES, messageArr);

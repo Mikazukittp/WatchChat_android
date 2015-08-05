@@ -77,7 +77,7 @@ public class ChatFragment extends Fragment {
         if (mListener != null) {
             String input = mInput.getText().toString();
             mListener.onSendMessage(input);
-            updateMessage(input, true);
+            updateMessage(input, true, new Date());
             // キーボードを閉じる
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -118,7 +118,7 @@ public class ChatFragment extends Fragment {
     class MessageUpdateBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateMessage(intent.getStringExtra(Constants.UPDATED_MESSAGE), false);
+            updateMessage(intent.getStringExtra(Constants.UPDATED_MESSAGE), false, new Date());
         }
     }
 
@@ -127,16 +127,16 @@ public class ChatFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Message[] messages = (Message[])intent.getSerializableExtra(Constants.FETCHED_MESSAGES);
             for (Message message: messages) {
-                updateMessage(message.getContent(), message.getSenderId() == mSettingRepository.getUserId());
+                updateMessage(message.getContent(), message.getSenderId() == mSettingRepository.getUserId(), message.getCreatedAt());
             }
         }
     }
 
-    private void updateMessage(String message, boolean isMine) {
+    private void updateMessage(String message, boolean isMine, Date createdAt) {
         if (isMine) {
-            mMessages.add(new Message(message, mSettingRepository.getUserId(), mSettingRepository.getOpponentId(), new Date()));
+            mMessages.add(new Message(message, mSettingRepository.getUserId(), mSettingRepository.getOpponentId(), createdAt));
         } else {
-            mMessages.add(new Message(message, mSettingRepository.getOpponentId(), mSettingRepository.getUserId(), new Date()));
+            mMessages.add(new Message(message, mSettingRepository.getOpponentId(), mSettingRepository.getUserId(), createdAt));
         }
         mListAdapter.notifyDataSetChanged();
     }

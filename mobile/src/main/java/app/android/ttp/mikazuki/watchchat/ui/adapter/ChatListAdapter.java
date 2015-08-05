@@ -40,13 +40,11 @@ public class ChatListAdapter extends ArrayAdapter<Message> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-
         Message message = getItem(position);
         holder.name.setText(message.getSenderId()+"");
         holder.message.setText(message.getContent());
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a", Locale.getDefault());
         holder.date.setText(sdf.format(message.getCreatedAt()));
-
 
         return convertView;
     }
