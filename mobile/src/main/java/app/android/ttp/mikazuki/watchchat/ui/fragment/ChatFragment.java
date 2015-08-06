@@ -25,7 +25,10 @@ import java.util.Locale;
 import app.android.ttp.mikazuki.watchchat.R;
 import app.android.ttp.mikazuki.watchchat.data.preference.repository.PreferenceSettingRepository;
 import app.android.ttp.mikazuki.watchchat.domain.entity.Message;
+import app.android.ttp.mikazuki.watchchat.domain.entity.User;
+import app.android.ttp.mikazuki.watchchat.domain.repository.BaseCallback;
 import app.android.ttp.mikazuki.watchchat.domain.repository.SettingRepository;
+import app.android.ttp.mikazuki.watchchat.domain.repository.UserRepository;
 import app.android.ttp.mikazuki.watchchat.ui.adapter.ChatListAdapter;
 import app.android.ttp.mikazuki.watchchat.util.Constants;
 import butterknife.Bind;
@@ -46,6 +49,7 @@ public class ChatFragment extends Fragment {
     ChatListAdapter mListAdapter;
     List<Message> mMessages;
     private SettingRepository mSettingRepository;
+    private UserRepository mUserRepository;
     private BroadcastReceiver mMessageUpdateBroadcastReceiver;
     private BroadcastReceiver mMessagesFetchBroadcastReceiver;
 
@@ -82,6 +86,13 @@ public class ChatFragment extends Fragment {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             mInput.setText("");
+        }
+    }
+
+    @OnClick(R.id.clear_friend)
+    public void onClearButtonPressed() {
+        if (mListener != null) {
+            mListener.deleteOpponentData();
         }
     }
 
@@ -145,6 +156,8 @@ public class ChatFragment extends Fragment {
         public void onFetchMessages();
 
         public void onSendMessage(String message);
+
+        public void deleteOpponentData();
     }
 
 }

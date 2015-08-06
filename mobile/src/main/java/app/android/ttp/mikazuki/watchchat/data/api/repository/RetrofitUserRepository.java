@@ -94,6 +94,22 @@ public class RetrofitUserRepository implements UserRepository {
     }
 
     @Override
+    public void deleteConnection(int id, final BaseCallback<User> cb){
+        mAPI.deleteConnection(id, new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                cb.onResponse(user);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e(TAG, error.getMessage());
+                cb.onResponse(null);
+            }
+        });
+    }
+
+    @Override
     public void link(int id, final BaseCallback<User> cb) {
         mAPI.linkUser(id, new Callback<User>() {
             @Override

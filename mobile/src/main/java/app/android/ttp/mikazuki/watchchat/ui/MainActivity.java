@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
             @Override
             public void onResponse(List<Message> messages) {
                 if (messages != null && messages.size() > 0) {
-                    for (Message message: messages){
+                    for (Message message : messages) {
                         System.out.println(message.getCreatedAt());
                     }
 
@@ -223,6 +223,17 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         });
     }
 
+    public void deleteOpponentData() {
+        mUserRepository.deleteConnection(mSettingRepository.getUserId(), new BaseCallback<User>() {
+            @Override
+            public void onResponse(User user) {
+                mSettingRepository.setOpponentId(-1);
+                mSettingRepository.setOpponentName("");
+            }
+        });
+        replaceFragment(SearchFragment.newInstance());
+    }
+
 
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -238,11 +249,11 @@ public class MainActivity extends AppCompatActivity implements RegisterFragment.
         return true;
     }
 
-    // DEBUG用
-    @OnClick(R.id.clear)
-    public void onClearPreference(View v) {
-        mSettingRepository.clear();
-    }
+//    // DEBUG用
+//    @OnClick(R.id.clear )
+//    public void onClearPreference(View v) {
+//        mSettingRepository.clear();
+//    }
 
     class RegistrationBroadcastReceiver extends BroadcastReceiver {
         @Override

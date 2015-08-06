@@ -12,12 +12,12 @@
         android:minHeight="?attr/actionBarSize" />
 
     <TextView
-        android:id="@+id/clear"
+        android:id="@+id/cl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tool_bar"
-        android:text="clear"
+        android:text=" "
         android:textColor="@color/accent500" />
 
     <ProgressBar
@@ -29,7 +29,7 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/clear" />
+        android:layout_below="@+id/cl" />
 
 
 </RelativeLayout>
