@@ -3,6 +3,7 @@ package app.android.ttp.mikazuki.watchchat.data.api.repository;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -35,7 +36,10 @@ public class RetrofitMessageRepository implements MessageRepository {
     }
 
     private void buildAPI() {
-        Gson GSON = new GsonBuilder().create();
+        Gson GSON = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
 
         RestAdapter REST_ADAPTER = new RestAdapter.Builder()
                 .setEndpoint(ApiUtil.API_URL)

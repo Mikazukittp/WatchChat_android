@@ -1,5 +1,7 @@
 package app.android.ttp.mikazuki.watchchat.domain.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,8 +11,14 @@ import java.util.Date;
 public class Message implements Serializable {
 
     private String content;
+
+    @SerializedName("sender_id")
     private int senderId;
+
+    @SerializedName("opponent_id")
     private int opponentId;
+
+    @SerializedName("created_at")
     private Date createdAt;
 
     public Message() {
@@ -35,9 +43,7 @@ public class Message implements Serializable {
         return senderId;
     }
 
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
-    }
+    public void setSenderId(int senderId) { this.senderId = senderId; }
 
     public int getOpponentId() {
         return opponentId;

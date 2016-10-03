@@ -25,7 +25,10 @@ import java.util.Locale;
 import app.android.ttp.mikazuki.watchchat.R;
 import app.android.ttp.mikazuki.watchchat.data.preference.repository.PreferenceSettingRepository;
 import app.android.ttp.mikazuki.watchchat.domain.entity.Message;
+import app.android.ttp.mikazuki.watchchat.domain.entity.User;
+import app.android.ttp.mikazuki.watchchat.domain.repository.BaseCallback;
 import app.android.ttp.mikazuki.watchchat.domain.repository.SettingRepository;
+import app.android.ttp.mikazuki.watchchat.domain.repository.UserRepository;
 import app.android.ttp.mikazuki.watchchat.ui.adapter.ChatListAdapter;
 import app.android.ttp.mikazuki.watchchat.util.Constants;
 import butterknife.Bind;
@@ -46,6 +49,7 @@ public class ChatFragment extends Fragment {
     ChatListAdapter mListAdapter;
     List<Message> mMessages;
     private SettingRepository mSettingRepository;
+    private UserRepository mUserRepository;
     private BroadcastReceiver mMessageUpdateBroadcastReceiver;
     private BroadcastReceiver mMessagesFetchBroadcastReceiver;
 
@@ -77,11 +81,18 @@ public class ChatFragment extends Fragment {
         if (mListener != null) {
             String input = mInput.getText().toString();
             mListener.onSendMessage(input);
-            updateMessage(input, true);
+            updateMessage(input, true, new Date());
             // キーボードを閉じる
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             mInput.setText("");
+        }
+    }
+
+    @OnClick(R.id.clear_friend)
+    public void onClearButtonPressed() {
+        if (mListener != null) {
+            mListener.deleteOpponentData();
         }
     }
 
@@ -118,7 +129,7 @@ public class ChatFragment extends Fragment {
     class MessageUpdateBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateMessage(intent.getStringExtra(Constants.UPDATED_MESSAGE), false);
+            updateMessage(intent.getStringExtra(Constants.UPDATED_MESSAGE), false, new Date());
         }
     }
 
@@ -127,16 +138,16 @@ public class ChatFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Message[] messages = (Message[])intent.getSerializableExtra(Constants.FETCHED_MESSAGES);
             for (Message message: messages) {
-                updateMessage(message.getContent(), message.getSenderId() == mSettingRepository.getUserId());
+                updateMessage(message.getContent(), message.getSenderId() == mSettingRepository.getUserId(), message.getCreatedAt());
             }
         }
     }
 
-    private void updateMessage(String message, boolean isMine) {
+    private void updateMessage(String message, boolean isMine, Date createdAt) {
         if (isMine) {
-            mMessages.add(new Message(message, mSettingRepository.getUserId(), mSettingRepository.getOpponentId(), new Date()));
+            mMessages.add(new Message(message, mSettingRepository.getUserId(), mSettingRepository.getOpponentId(), createdAt));
         } else {
-            mMessages.add(new Message(message, mSettingRepository.getOpponentId(), mSettingRepository.getUserId(), new Date()));
+            mMessages.add(new Message(message, mSettingRepository.getOpponentId(), mSettingRepository.getUserId(), createdAt));
         }
         mListAdapter.notifyDataSetChanged();
     }
@@ -145,6 +156,8 @@ public class ChatFragment extends Fragment {
         public void onFetchMessages();
 
         public void onSendMessage(String message);
+
+        public void deleteOpponentData();
     }
 
 }

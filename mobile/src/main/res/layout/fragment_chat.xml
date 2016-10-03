@@ -15,6 +15,15 @@
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:id="@+id/clear_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tool_bar"
+        android:text="友達をやめる"
+        android:textColor="@color/accent500" />
+
     <LinearLayout
         android:id="@+id/input_layout"
         android:layout_width="match_parent"

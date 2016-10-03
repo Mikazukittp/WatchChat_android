@@ -13,6 +13,8 @@ public interface UserRepository {
 
     void getOpponent(int id, BaseCallback<User> cb);
 
+    public void deleteConnection(int id, BaseCallback<User> cb);
+
     public void link(int id, BaseCallback<User> cb);
 
     public void updateToken(int id, String token, BaseCallback<User> cb);
